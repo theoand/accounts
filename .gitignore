@@ -1,0 +1,8 @@
+/target/
+/selenium_screenshots/
+/phantomjsdriver.log
+
+*.classpath
+*.prefs
+src/test/java/com/andreouconsulting/theo/accounts/TestSeleniumService.java
+*.csv
