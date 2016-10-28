@@ -1,6 +1,7 @@
 package com.andreouconsulting.theo.accounts.amex;
 
-import static org.apache.commons.lang3.StringUtils.replace;
+import static java.lang.Double.valueOf;
+import static org.apache.commons.lang3.StringUtils.replacePattern;
 
 public class AmexPageConstants {
 
@@ -14,9 +15,9 @@ public class AmexPageConstants {
 
 	public static final String LOGIN_PAGE_CONFIRM_BUTTON_ID = "lilo_formSubmit";
 
-	public static final String BALANCE_XPATH = "balance-data";
+	public static final String BALANCE_XPATH = "//div[@id='card-balance']//span[@class='balance-data']";
 
 	public static Double getAmountFromMoney(String amount) {
-		return Double.valueOf(replace(replace(amount, "£", ""), " ", ""));
+		return valueOf(replacePattern(amount, "£| |,", ""));
 	}
 }

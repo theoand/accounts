@@ -42,10 +42,10 @@ public class AmexScript {
 		service.clickButtonWithId(LOGIN_PAGE_CONFIRM_BUTTON_ID);
 
 		// Wait until next page loads
-		service.waitForPageToLoad("class", BALANCE_XPATH);
+		service.waitForPageToLoadWithXpath(BALANCE_XPATH);
 
 		// Get balances
-		WebElement accountBalance = service.findElementByAtrribute("class", BALANCE_XPATH);
+		WebElement accountBalance = service.findElementWithXpath(BALANCE_XPATH);
 		balances.put("AMEX", getAmountFromMoney(accountBalance.getText()));
 
 		return balances;

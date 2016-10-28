@@ -1,6 +1,9 @@
 package com.andreouconsulting.theo.accounts.halifax;
 
-import static org.apache.commons.lang3.StringUtils.replace;
+import static java.lang.Double.valueOf;
+import static org.apache.commons.lang3.StringUtils.replacePattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Constants relating to the Halifax page.
@@ -57,6 +60,6 @@ public class HalifaxPageConstants {
 	 * @return
 	 */
 	public static double getAmountFromMoneyLabel(String value) {
-		return Double.valueOf(replace(replace(value, "£ ", ""), ",", ""));
+		return valueOf(replacePattern(value, "£ |,", ""));
 	}
 }
