@@ -1,8 +1,11 @@
 package com.andreouconsulting.theo.accounts.splitwise;
 
 import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.BALANCE_XPATH;
+import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.DASHBOARD_XPATH;
+import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.LOGIN_PAGE_CONFIRM_BUTTON_XPATH;
 import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.LOGIN_PAGE_EMAIL_XPATH;
 import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.LOGIN_PAGE_PASSWORD_XPATH;
+import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.SPLITWISE;
 import static com.andreouconsulting.theo.accounts.splitwise.SplitwisePageConstants.getAmountFromMoney;
 
 import java.util.Map;
@@ -35,14 +38,18 @@ public class SplitwiseScript {
 		// Populate the log-in page
 		service.enterTextToFieldWithXpath(LOGIN_PAGE_EMAIL_XPATH, username);
 		service.enterTextToFieldWithXpath(LOGIN_PAGE_PASSWORD_XPATH, password);
-		service.clickButtonWithXpath(SplitwisePageConstants.LOGIN_PAGE_CONFIRM_BUTTON_XPATH);
+		service.clickButtonWithXpath(LOGIN_PAGE_CONFIRM_BUTTON_XPATH);
 
 		// Wait until next page loads
-		service.waitForPageToLoadWithXpath(BALANCE_XPATH);
+		service.waitForPageToLoadWithXpath(DASHBOARD_XPATH);
 
 		// Get balances
-		WebElement accountBalance = service.findElementWithXpath(BALANCE_XPATH);
-		balances.put("Splitwise", getAmountFromMoney(accountBalance.getText()));
+		try{
+			WebElement accountBalance = service.findElementWithXpath(BALANCE_XPATH);
+			balances.put(SPLITWISE, getAmountFromMoney(accountBalance.getText()));
+		} catch (Exception e){
+			balances.put(SPLITWISE, 0.0);
+		}
 
 		return balances;
 	}

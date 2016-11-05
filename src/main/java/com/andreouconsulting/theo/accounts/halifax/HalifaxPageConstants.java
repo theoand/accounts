@@ -3,8 +3,6 @@ package com.andreouconsulting.theo.accounts.halifax;
 import static java.lang.Double.valueOf;
 import static org.apache.commons.lang3.StringUtils.replacePattern;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Constants relating to the Halifax page.
  * 
