@@ -1,24 +1,24 @@
-package com.andreouconsulting.theo.accounts.halifax;
+package com.andreouconsulting.theo.accounts.hsbc;
 
 import static java.lang.Double.valueOf;
 import static org.apache.commons.lang3.StringUtils.replacePattern;
 
 /**
- * Constants relating to the Halifax page.
+ * Constants relating to the Hsbc page.
  * 
  * @author theo@andreouconsulting.com
  *
  */
-public class HalifaxPageConstants {
+public class HsbcPageConstants {
 
-	static final String HOMEPAGE = "https://www.halifax-online.co.uk/personal/logon/login.jsp";
-
+	static final String HOMEPAGE = "http://www.hsbc.co.uk";
+	
+	static final String LOGIN_BUTTON_CLASS = "redBtn";
+	
 	// Homepage items
-	static final String HOMEPAGE_USERNAME_ID = "frmLogin:strCustomerLogin_userID";
+	static final String USERNAME_ID = "Username1";
 
-	static final String HOMEPAGE_PASSWORD_ID = "frmLogin:strCustomerLogin_pwd";
-
-	static final String HOMEPAGE_CONTINUE_ID = "frmLogin:btnLogin";
+	static final String USERNAME_CONTINUE_ID = "submit_input";
 
 	// Memorable information items page
 	// The dropdowns use this as 'id' and the labels as 'for'

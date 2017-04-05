@@ -39,6 +39,11 @@ public class SantanderScript {
 
 		// Go to homepage
 		service.navigateTo(SantanderPageConstants.LOGIN_PAGE);
+		
+		service.clickButtonWithAttribute("class", SantanderPageConstants.LOGIN_PAGE_BUTTON_CLASS);
+
+		//Wait for page to load
+		service.waitForPageToLoad("id", LOGIN_PAGE_CUSTOMER_ID);
 
 		// Remove the advertisment if it exists
 		try {
@@ -82,7 +87,7 @@ public class SantanderScript {
 		List<WebElement> accountBalancesNames = service.findElementsWithXpath(BALANCE_NAMES_XPATH);
 		List<WebElement> accountBalances = service.findElementsWithXpath(BALANCE_AMOUNTS_XPATH);
 		for (int i = 0; i < accountBalances.size(); i++) {
-			balances.put(accountBalancesNames.get(i).getText(), getAmountFromMoney(accountBalances.get(i).getText()));
+			balances.put("Santander - " + accountBalancesNames.get(i).getText(), getAmountFromMoney(accountBalances.get(i).getText()));
 		}
 
 		return balances;

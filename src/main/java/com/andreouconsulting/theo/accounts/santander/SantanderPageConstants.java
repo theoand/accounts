@@ -5,8 +5,10 @@ import static org.apache.commons.lang3.StringUtils.replacePattern;
 
 public class SantanderPageConstants {
 
-	public static final String LOGIN_PAGE = "https://retail.santander.co.uk";
+	public static final String LOGIN_PAGE = "http://www.santander.co.uk/uk/index";
 
+	public static final String LOGIN_PAGE_BUTTON_CLASS = "buttonLogin2";
+	
 	public static final String LOGIN_PAGE_CUSTOMER_ID = "infoLDAP_E.customerID";
 
 	public static final String LOGIN_PAGE_SECRET_QUESTION_LABEL_XPATH = "//form/fieldset/div/div/span[@class='data']";

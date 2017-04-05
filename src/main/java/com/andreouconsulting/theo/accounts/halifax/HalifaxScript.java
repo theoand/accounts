@@ -66,7 +66,7 @@ public class HalifaxScript {
 		List<WebElement> accountBalancesNames = service.findElementsWithXpath(ACCOUNTS_BALANCES_NAME_XPATH);
 		List<WebElement> accountBalances = service.findElementsWithXpath(ACCOUNTS_BALANCES_XPATH);
 		for (int i = 0; i < accountBalances.size(); i++) {
-			balances.put(accountBalancesNames.get(i).getText(), getAmountFromMoneyLabel(accountBalances.get(i).getText()));
+			balances.put("Z - " + accountBalancesNames.get(i).getText(), getAmountFromMoneyLabel(accountBalances.get(i).getText()));
 		}
 
 		return balances;

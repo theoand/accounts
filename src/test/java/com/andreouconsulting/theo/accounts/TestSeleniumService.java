@@ -2,14 +2,17 @@ package com.andreouconsulting.theo.accounts;
 
 import static com.andreouconsulting.theo.selenium.FileService.writeToFile;
 
+import java.io.File;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.andreouconsulting.theo.accounts.amex.AmexScript;
 import com.andreouconsulting.theo.accounts.halifax.HalifaxScript;
+import com.andreouconsulting.theo.accounts.hsbc.HsbcScript;
 import com.andreouconsulting.theo.accounts.santander.SantanderScript;
 import com.andreouconsulting.theo.accounts.splitwise.SplitwiseScript;
 import com.andreouconsulting.theo.selenium.Browser;
@@ -49,6 +52,13 @@ public class TestSeleniumService {
 	private static final String SANTANDER_SECRET_ANSWER_MOTHER = "XXX";
 	private static final String SANTANDER_BALANCES_CSV = "Santander_balances.csv";
 
+	//HSBC log-in details
+	private static final String HSBC_CUSTOMER_ID = "XXX";
+	private static final String HSBC_PASSCODE = "XXX";
+	private static final String HSBC_SECRET_ANSWER_WORK = "XXX";
+	private static final String HSBC_BALANCES_CSV = "HSBC_balances.csv";
+
+	//Other
 	private static final String BALANCES_CSV = "Balances.csv";
 	private SeleniumService service;
 
@@ -82,6 +92,11 @@ public class TestSeleniumService {
 	public void testGetBalances() throws Exception {
 		Map<String, Double> balances = Maps.newHashMap();
 
+		try{
+			FileUtils.deleteDirectory(new File("./selenium_screenshots"));
+		} catch (Exception e){
+			//continue
+		}
 		// Get Santander balances
 		SantanderScript santanderScript = new SantanderScript(service);
 		Map<String, Double> santanderBalances = santanderScript.execute(SANTANDER_CUSTOMER_ID, SANTANDER_PASSCODE, SANTANDER_PIN, SANTANDER_SECRET_ANSWER_ΒΙRΤΗ, SANTANDER_SECRET_ANSWER_SCHOOL,
@@ -99,11 +114,16 @@ public class TestSeleniumService {
 		SplitwiseScript splitwiseScript = new SplitwiseScript(service);
 		Map<String, Double> splitwiseBalances = splitwiseScript.execute(SPLITWISE_USERNAME, SPLITWISE_PASSWORD);
 
+		HsbcScript hsbcScript = new HsbcScript(service);
+		Map<String, Double> hsbcBalances = hsbcScript.execute(HSBC_CUSTOMER_ID, HSBC_PASSCODE, HSBC_SECRET_ANSWER_WORK);
+
 		// Prepare the full balances
 		balances.putAll(santanderBalances);
 		balances.putAll(halifaxBalances);
 		balances.putAll(amexBalances);
 		balances.putAll(splitwiseBalances);
+		balances.putAll(hsbcBalances);
+		
 
 		// Write the balances to file
 		writeToFile(balances, BALANCES_CSV);
@@ -111,11 +131,32 @@ public class TestSeleniumService {
 
 	
 	/**
+	 * Gets the balances for Hsbc and adds them on a CSV file.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetBalancesForHsbc() throws Exception {
+		Map<String, Double> balances = Maps.newHashMap();
+
+		// Get Hsbc balances
+		HsbcScript hsbcScript = new HsbcScript(service);
+
+		Map<String, Double> hsbcBalances = hsbcScript.execute(HSBC_CUSTOMER_ID, HSBC_PASSCODE, HSBC_SECRET_ANSWER_WORK);
+
+		// Prepare the full balances
+		balances.putAll(hsbcBalances);
+
+		// Write the balances to file
+		writeToFile(balances, HSBC_BALANCES_CSV);
+	}
+	
+	
+	
+	/**
 	 * Gets the balances for Halifax and adds them on a CSV file.
 	 * 
 	 * @throws Exception
 	 */
-	@Test
 	public void testGetBalancesForHalifax() throws Exception {
 		Map<String, Double> balances = Maps.newHashMap();
 
@@ -136,7 +177,6 @@ public class TestSeleniumService {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
 	public void testGetBalancesForSantander() throws Exception {
 		Map<String, Double> balances = Maps.newHashMap();
 
@@ -158,7 +198,6 @@ public class TestSeleniumService {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
 	public void testGetBalancesForAmex() throws Exception {
 		Map<String, Double> balances = Maps.newHashMap();
 
@@ -179,7 +218,6 @@ public class TestSeleniumService {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
 	public void testGetBalancesForSplitwise() throws Exception {
 		Map<String, Double> balances = Maps.newHashMap();
 

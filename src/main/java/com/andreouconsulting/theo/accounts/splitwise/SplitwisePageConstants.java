@@ -19,6 +19,8 @@ public class SplitwisePageConstants {
 	public static final String BALANCE_XPATH = "//div[@id='dashboard_balances']/div[@class='total_balances']/div[@class='block'][1]/span";
 
 	public static final String DASHBOARD_XPATH = "//div[@class='dashboard header']/div[@class='topbar']";
+	
+	public static final String PAY_XPATH = "//a[@class='no-thanks']";
 
 	public static Double getAmountFromMoney(String amount) {
 		return valueOf(StringUtils.replacePattern(amount, "£| ", ""));

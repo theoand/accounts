@@ -40,6 +40,11 @@ public class SplitwiseScript {
 		service.enterTextToFieldWithXpath(LOGIN_PAGE_PASSWORD_XPATH, password);
 		service.clickButtonWithXpath(LOGIN_PAGE_CONFIRM_BUTTON_XPATH);
 
+		try{
+			service.findElementWithXpath(SplitwisePageConstants.PAY_XPATH).click();
+		} catch(Exception e){
+			//do nothing
+		}
 		// Wait until next page loads
 		service.waitForPageToLoadWithXpath(DASHBOARD_XPATH);
 
