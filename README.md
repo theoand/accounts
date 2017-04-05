@@ -4,6 +4,7 @@ Test script to retrieve the balances from your bank accounts:
 - Santander
 - American Express
 - Splitwise
+- HSBC
 
 To make this work you will need to download the appropriate Selenium web-driver and place it in the /src/main/resources folder
 - Firefox web-driver ("src/main/resources/geckodriver.exe") - https://github.com/mozilla/geckodriver/releases
